@@ -10,7 +10,7 @@
     group: websitegrp
     shell: /sbin/nologin
     create_home: yes
-    password: "{{ 'Password123!' | password_hash('sha512') }}"
+    password: "{{ 'sftp_password' | password_hash('sha512') }}"
 
 - name: Fix student home permissions
   file:

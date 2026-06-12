@@ -1,0 +1,30 @@
+---
+- name: Install Nginx
+  dnf:
+    name: nginx
+    state: present
+
+- name: Enable Nginx
+  service:
+    name: nginx
+    enabled: yes
+
+- name: Start Nginx
+  service:
+    name: nginx
+    state: started
+
+- name: Deploy WordPress Nginx config
+  template:
+    src: wordpress.conf.j2
+    dest: /etc/nginx/conf.d/wordpress.conf
+
+- name: Remove default Nginx config
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted

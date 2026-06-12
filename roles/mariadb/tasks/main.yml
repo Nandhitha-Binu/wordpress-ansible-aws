@@ -1,0 +1,25 @@
+---
+- name: Install MariaDB server
+  dnf:
+    name: mariadb105-server
+    state: present
+
+- name: Start MariaDB
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Create WordPress database
+  community.mysql.mysql_db:
+    name: wordpress
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock
+
+- name: Create WordPress user
+  community.mysql.mysql_user:
+    name: wpuser
+    password: CHANGE_ME
+    priv: "wordpress.*:ALL"
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock

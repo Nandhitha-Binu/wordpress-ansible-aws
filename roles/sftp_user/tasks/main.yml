@@ -1,0 +1,20 @@
+---
+- name: Create website group
+  group:
+    name: websitegrp
+    state: present
+
+- name: Create SFTP user
+  user:
+    name: student
+    group: websitegrp
+    shell: /sbin/nologin
+    create_home: yes
+    password: "{{ 'Password123!' | password_hash('sha512') }}"
+
+- name: Fix student home permissions
+  file:
+    path: /home/student
+    owner: student
+    group: websitegrp
+    mode: '0755'

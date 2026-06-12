@@ -1,0 +1,10 @@
+*.swp
+*.retry
+*.log
+
+*.pem
+*.key
+*.crt
+
+.vscode/
+.idea/

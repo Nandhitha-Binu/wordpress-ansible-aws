@@ -1,0 +1,32 @@
+server {
+    listen 80;
+    server_name mywordpressblog.duckdns.org;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name mywordpressblog.duckdns.org;
+
+    ssl_certificate /etc/letsencrypt/live/mywordpressblog.duckdns.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mywordpressblog.duckdns.org/privkey.pem;
+
+    root /home/student/websitename/public;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php-fpm/www.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi.conf;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}

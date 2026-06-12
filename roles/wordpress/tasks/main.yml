@@ -1,0 +1,39 @@
+---
+- name: Download WordPress
+  get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /tmp/latest.tar.gz
+
+- name: Extract WordPress
+  unarchive:
+    src: /tmp/latest.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Copy WordPress to web root
+  copy:
+    src: /tmp/wordpress/
+    dest: /var/www/html/
+    remote_src: yes
+
+- name: Set WordPress ownership
+  file:
+    path: /var/www/html
+    owner: nginx
+    group: nginx
+    recurse: yes    
+
+- name: Set permissions
+  file:
+    path: /var/www/html
+    state: directory
+    recurse: yes
+    mode: '0755'
+
+- name: Create wp-config.php
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wp-config.php
+    owner: nginx
+    group: nginx
+    mode: '0644'

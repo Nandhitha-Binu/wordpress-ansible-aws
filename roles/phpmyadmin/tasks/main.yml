@@ -1,0 +1,29 @@
+---
+- name: Download phpMyAdmin
+  get_url:
+    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.gz
+    dest: /tmp/phpmyadmin.tar.gz
+
+- name: Extract phpMyAdmin
+  unarchive:
+    src: /tmp/phpmyadmin.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Find extracted directory
+  shell: ls -d /tmp/phpMyAdmin-*
+  register: phpmyadmin_dir
+  changed_when: false
+
+- name: Copy phpMyAdmin files
+  copy:
+    src: "{{ phpmyadmin_dir.stdout }}/"
+    dest: /home/student/websitename/public/phpmyadmin/
+    remote_src: yes
+
+- name: Set ownership
+  file:
+    path: /home/student/websitename/public/phpmyadmin
+    owner: nginx
+    group: nginx
+    recurse: yes

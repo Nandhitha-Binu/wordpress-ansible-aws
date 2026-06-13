@@ -13,19 +13,19 @@
 - name: Copy WordPress to web root
   copy:
     src: /tmp/wordpress/
-    dest: /var/www/html/
+    dest: /home/student/websitename/public/
     remote_src: yes
 
 - name: Set WordPress ownership
   file:
-    path: /var/www/html
+    path: /home/student/websitename/public
     owner: nginx
     group: nginx
     recurse: yes    
 
 - name: Set permissions
   file:
-    path: /var/www/html
+    path: /home/student/websitename/public
     state: directory
     recurse: yes
     mode: '0755'
@@ -33,7 +33,7 @@
 - name: Create wp-config.php
   template:
     src: wp-config.php.j2
-    dest: /var/www/html/wp-config.php
+    dest: /home/student/websitename/public/wp-config.php
     owner: nginx
     group: nginx
     mode: '0644'

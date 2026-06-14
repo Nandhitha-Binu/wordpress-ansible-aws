@@ -20,7 +20,6 @@ The objective of this project is to demonstrate Infrastructure Automation, Confi
 * SFTP
 * DuckDNS
 * Let's Encrypt SSL
-* Git & GitHub
 
 ---
 

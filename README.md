@@ -134,19 +134,6 @@ https://mywordpressblog.duckdns.org/phpmyadmin
 
 ---
 
-## Screenshots
-
-Add screenshots of:
-
-1. AWS EC2 Instance
-2. Ansible Playbook Execution
-3. WordPress Homepage
-4. WordPress Admin Dashboard
-5. phpMyAdmin Dashboard
-6. SSL Certificate Verification
-
----
-
 ## Learning Outcomes
 
 * Infrastructure automation using Ansible
